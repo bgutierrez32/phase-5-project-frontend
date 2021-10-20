@@ -15,6 +15,7 @@ const [location, setLocation] = useState([])
 const [service, setService] = useState([])
 const [car, setCar] = useState([])
 const [shop, setShop] = useState([])
+const [appointment, setAppointment] = useState([])
 
 const handleLogout = () => {console.log("In handleLogout")
 
@@ -49,6 +50,11 @@ useEffect(() => {
     .then(fetchedShop => {console.log(fetchedShop)
         setShop(fetchedShop)
     })
+    fetch('/appointments')
+    .then(r => r.json())
+    .then(fetchedAppointment => {console.log(fetchedAppointment)
+        setAppointment(fetchedAppointment)
+    })
 }, [])
 
 // const handleAddCar=()=>{
@@ -77,31 +83,32 @@ useEffect(() => {
 
     return(
         <div>
-                <nav>
-                <span>
-                    <NavLink to="/Home" exact>
-                        <button>Home</button>
+                <nav className="nav">
+                <span className="navSpan">
+                    <NavLink  className="navLink" to="/Home" exact>
+                        Home
                     </NavLink>
-                    <NavLink to="/Locations">
-                        <button>Locations</button>
+                    <NavLink className="navLink" to="/Locations">
+                        Locations
                     </NavLink>
-                    <NavLink to="/Services">
-                        <button>Services</button>
+                    <NavLink className="navLink" to="/Services">
+                        Services
                     </NavLink>
-                    <NavLink to="/Appointment">
-                        <button>Make Appointment</button>
+                    <NavLink className="navLink" to="/Appointment">
+                        Make Appointment
                     </NavLink>
-                    <NavLink to="/MyAppointment">
-                        <button>My Appointments</button>
+                    <NavLink className="navLink" to="/MyAppointment">
+                        My Appointments
                     </NavLink>
-                    <NavLink to="/MyCars">
-                        <button>Add Your Car</button>
+                    <NavLink className="navLink" to="/MyCars">
+                        Add Your Car
                     </NavLink>
-                    <NavLink to="/login">
-                        <button onClick={handleLogout}> Logout </button>
+                    <NavLink className="navLink" to="/login" onClick={handleLogout}>
+                        {/* <button onClick={handleLogout}> Logout </button> */}
+                        Logout
                     </NavLink>
                 </span>
-                <span>Logged in as {currentUser.name}</span>
+                <span className="span">Logged in as {currentUser.name}</span>
             </nav>
             <Switch>
             <Route path="/login">
@@ -125,6 +132,8 @@ useEffect(() => {
                         mapToCar={car}
                         mapToShop={shop}
                         setCurrentUser={setCurrentUser}
+                        setAppointment={setAppointment}
+                        renderAppointment={appointment}
                 />
             </Route>
             <Route path="/Services">
@@ -133,13 +142,14 @@ useEffect(() => {
                 />
             </Route>
             <Route path="/MyAppointment">
-                <MyAppointment/>
+                <MyAppointment appointmentToMap={appointment}/>
             </Route>
             <Route path="/myCars">
                 <Car
                     currentUser={currentUser}
                     setCurrentUser={setCurrentUser}
                     mapToCar={car}
+                    setCar={setCar}
                 />
             </Route>
             

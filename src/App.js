@@ -35,7 +35,7 @@ console.log("Fetch Done")
 if(!authChecked) { return <div><h1>Hi</h1></div>}
   return (
     <div>
-    <h1>The World of CarServices</h1>
+    <h1 className="title" >🛠 The World of CarServices 🛠</h1>
     <Router>
       {currentUser ? (
           <AuthenticatedApp

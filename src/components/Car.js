@@ -2,7 +2,7 @@ import CarForm from "./CarForm"
 import CarCard from "./CarCard"
 import { useState } from 'react'
 
-function Car({currentUser, setCurrentUser, mapToCar}){
+function Car({currentUser, setCurrentUser, mapToCar, setCar}){
 
     return(
     <div>
@@ -10,6 +10,8 @@ function Car({currentUser, setCurrentUser, mapToCar}){
         <CarForm
             currentUser={currentUser}
             setCurrentUser={setCurrentUser}
+            setCar={setCar}
+            mapToCar={mapToCar}
         />
 
         {

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function AppointmentForm({mapToCar, mapToShop, setCurrentUser}){
+function AppointmentForm({mapToCar, mapToShop, setCurrentUser, setAppointment, renderAppointment}){
 
     const [date, setDate] = useState('')
     const [car_id, setCar_id] = useState('')
@@ -23,21 +23,23 @@ function AppointmentForm({mapToCar, mapToShop, setCurrentUser}){
         .then(r => r.json())
         .then(appointment => {
             console.log(appointment)
+            setAppointment([...renderAppointment, appointment])
             // setCurrentUser(appointment)
         })
     }
 
 
     return(
-        <div>
+        <div className="appointmentFormDiv">
          <form className="appointmentForm" onSubmit={handleMakeAppointment}>
+             <label> Select You Car:</label>
                 <select className="carDrop" 
                 type="text" 
                 id="car" 
                 value={car_id} 
                 onChange={(e) => setCar_id(e.target.value)}>
                     <option value="">
-                    Select your Car:
+                    Choose your Car:
                     </option>
                     {mapToCar.map((car)=> {
                         return(
@@ -46,13 +48,14 @@ function AppointmentForm({mapToCar, mapToShop, setCurrentUser}){
                     })}
 
                 </select>
+                <label>Select a Shop:</label>
                 <select className="shopDrop" 
                 type="text" 
                 id="shop" 
                 value={shop_id} 
                 onChange={(e) => setShop_id(e.target.value)}>
                     <option value="">
-                    Select a Shop:
+                    Choose a Shop:
                     </option>
                     {mapToShop.map((shop)=> {
                         return(
@@ -61,25 +64,18 @@ function AppointmentForm({mapToCar, mapToShop, setCurrentUser}){
                     })}
 
                 </select>
-                {/* <label>
-                    Choose Shop:
-                <input
-                type="text" 
-                name="shop" 
-                placeholder="Choose perferred shop..."
-                />
-                </label> */}
                 <label>
                     Date:
                 <input
-                    type="date" 
+                    className="dateInput"
+                    type="datetime-local" 
                     name="name" 
-                    placeholder="date"
+                    placeholder="datetime-local"
                     value={date}
                     onChange={(e)=> setDate(e.target.value)} />
                 </label>
                 
-                <input type="submit" value="Submit" />
+                <input type="submit" value="Submit" className="submitAppointment"/>
             </form>
         </div>
     )

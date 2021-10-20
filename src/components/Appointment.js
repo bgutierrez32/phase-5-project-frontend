@@ -1,7 +1,8 @@
 import SearchBar from "./SearchBar"
 import AppointmentForm from "./AppointmentForm"
+import MyAppointment from "./MyAppointments"
 
-function Appointment({mapToCar, mapToShop}){
+function Appointment({mapToCar, mapToShop, setAppointment, renderAppointment}){
 
     return(
         <div>
@@ -9,8 +10,10 @@ function Appointment({mapToCar, mapToShop}){
             <AppointmentForm
                 mapToCar={mapToCar}
                 mapToShop={mapToShop}
-            
+                setAppointment={setAppointment}
+                renderAppointment={renderAppointment}
             />
+            {/* <MyAppointment/> */}
            
         </div>
     )

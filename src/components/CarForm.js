@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function CarForm({currentUser, setCurrentUser}){
+function CarForm({currentUser, setCurrentUser, setCar, mapToCar}){
     const [year, setYear] = useState('')
     const [make, setMake] = useState('')
     const [model, setModel] = useState('')
@@ -25,15 +25,17 @@ function CarForm({currentUser, setCurrentUser}){
         .then(r => r.json())
         .then(cars => {
             console.log(cars)
-            setCurrentUser(cars)
+            setCar([...mapToCar, cars])
+            // setCurrentUser(cars)
         })
     }
     return(
-        <div>
+        <div className="carFormDiv">
             <form onSubmit={handleAddCar}>
         <label>
             Year:
             <input
+                className="yearInput"
                 type="text" 
                 name="year" 
                 value={year}
@@ -44,6 +46,7 @@ function CarForm({currentUser, setCurrentUser}){
         <label>
             Make:
             <input
+            className="makeInput"
             type="text" 
             name="make" 
             value={make}
@@ -54,6 +57,7 @@ function CarForm({currentUser, setCurrentUser}){
         <label>
             Model:
             <input
+            className="modelInput"
             type="text" 
             name="model" 
             value={model}
@@ -64,6 +68,7 @@ function CarForm({currentUser, setCurrentUser}){
         <label>
             Insurance:
             <input
+            className="insuranceInput"
             type="text" 
             name="insurance" 
             value={insurance}
@@ -71,7 +76,7 @@ function CarForm({currentUser, setCurrentUser}){
             onChange={(event) => setInsurance(event.target.value)}
             />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit" className="carSubmit"/>
     </form>
     
     </div>)
